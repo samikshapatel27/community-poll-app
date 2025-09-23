@@ -1,55 +1,56 @@
-🗳️ Community Poll App
-
+# 🗳️ Community Poll App
 A real-time full-stack polling application for creating, voting, and managing interactive polls with live results.
 
-🚀 Features
+## Features
 
-Live voting updates (WebSockets)
+- **Real-time Voting**: Live updates using WebSocket technology
+- **User Authentication**: Magic link email-based login system
+- **Poll Management**: Create, view, and delete polls
+- **Responsive Design**: Works seamlessly on desktop and mobile
+- **Live Results**: Visual progress bars and percentage displays
 
-Email magic link login (JWT)
+## Tech Stack
 
-Create, view, delete polls
+- **Frontend**: React, Tailwind CSS, Axios, React Router, Socket.io-client  
+- **Backend**: Node.js, Express, MongoDB (Mongoose), JWT, Socket.io, Nodemailer
 
-Responsive design with instant results
-
-🛠️ Tech Stack
-
-Frontend: React, Tailwind CSS, Axios, React Router, Socket.io-client
-Backend: Node.js, Express, MongoDB (Mongoose), JWT, Socket.io, Nodemailer
-
-📦 Setup & Run
+## Setup & Run
+```bash
 # Clone repo
 git clone https://github.com/samikshapatel27/community-poll-app.git
 cd community-poll-app
+```
 
-
-# Backend
+### Backend
+```bash
 cd backend
 npm install
-# create .env with MONGODB_URI, JWT_SECRET, EMAIL_USER, APP_PASSWORD, PORT
+
+# Create .env with MONGODB_URI, JWT_SECRET, EMAIL_USER, APP_PASSWORD, PORT
 npm run dev
+```
 
-
-# Frontend
+### Frontend
+```bash
 cd ../frontend
 npm install
 npm run dev
+```
 
-Visit: http://localhost:5173
+Access the application at http://localhost:5173
 
-🎯 Usage
+## Usage
 
-Login via magic link
+- **Create an Account**: Enter your email to receive a magic link
+- **Create Polls**: Add questions and multiple options
+- **Share Polls**: Send poll links to others to vote
+- **View Results**: Watch live updates as people vote
+- **Manage Polls**: Delete polls you've created
 
-Create polls with options
+## 📄 License
 
-Share and vote on polls
+This project is licensed under the MIT License.  
 
-View live results
+## 👨‍💻 Author
 
-Delete your polls
-
-📄 License
-
-MIT License
-👨‍💻 Author: Samiksha Patel
+Samiksha Patel
