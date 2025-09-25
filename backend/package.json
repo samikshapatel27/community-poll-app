@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "community-poll-app-backend",
   "version": "1.0.0",
   "description": "Backend server for Community Poll App with real-time voting",
   "main": "server.js",
@@ -8,7 +8,13 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["poll", "voting", "real-time", "express", "mongodb"],
+  "keywords": [
+    "poll",
+    "voting",
+    "real-time",
+    "express",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

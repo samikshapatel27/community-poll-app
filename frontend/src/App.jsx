@@ -4,7 +4,7 @@ import CreatePoll from './CreatePoll';
 import PollsList from './PollsList';
 import Login from './Login';
 import AuthVerify from './AuthVerify';
-import axios from 'axios';
+import api from './api/config';
 import { Toaster, toast } from 'react-hot-toast';
 
 // Navigation component with responsive design
@@ -58,15 +58,13 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.get('http://localhost:5000/api/auth/me');
+          const response = await api.get('/api/auth/me');
         
           setUser(response.data.user);
           toast.success('Welcome back!');
         } catch (error) {
           console.error('Token validation failed', error);
           localStorage.removeItem('token');
-          delete axios.defaults.headers.common['Authorization'];
           toast.error('Session expired. Please login again.');
         }
       }
@@ -78,7 +76,6 @@ function App() {
   // Handle successful login
   const handleLogin = (userData, token) => {
     localStorage.setItem('token', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setUser(userData);
     toast.success('Login successful!');
   };
@@ -86,7 +83,6 @@ function App() {
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from './api/config';
 import { useNavigate } from 'react-router-dom';
 
 function CreatePoll() {
@@ -42,8 +42,7 @@ function CreatePoll() {
         return;
       }
 
-      // Create new poll via API with authorization header
-      const response = await axios.post('http://localhost:5000/api/polls', {
+      const response = await api.post(`/api/polls`, {
         question: question.trim(),
         options: nonEmptyOptions,
       }, {
@@ -57,7 +56,7 @@ function CreatePoll() {
       userPolls.push(response.data._id);
       localStorage.setItem('userPolls', JSON.stringify(userPolls));
       
-      setMessage('Poll created successfully! 🎉');
+      setMessage('Poll created successfully!');
       setQuestion('');
       setOptions(['', '']);
     } catch (error) {

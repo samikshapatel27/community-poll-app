@@ -15,15 +15,28 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:5173",
+      "https://community-poll-app-frontend.onrender.com",
+      process.env.FRONTEND_URL // Environment variable
+    ].filter(Boolean),
+      methods: ["GET", "POST"],
+      credentials: true
   }
 });
 
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173", 
+    "https://community-poll-app-frontend.onrender.com",
+    process.env.FRONTEND_URL
+  ].filter(Boolean),
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 app.use(express.json());
 
 // Connect to MongoDB
@@ -144,7 +157,8 @@ app.post('/api/auth/login', async (req, res) => {
       token: token,
     });
 
-    const magicLink = `http://localhost:5173/auth/verify?token=${token}`;
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const magicLink = `${frontendUrl}/auth/verify?token=${token}`;
     
     const readyTransporter = await getReadyTransporter();
     await readyTransporter.sendMail({

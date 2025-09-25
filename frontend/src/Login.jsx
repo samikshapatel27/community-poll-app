@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from './api/config';
 
 // Login component for magic link authentication
 function Login({ onLogin }) {
@@ -22,7 +22,7 @@ function Login({ onLogin }) {
 
     try {
       // Send magic link request to backend
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email });
+      const response = await api.post('/api/auth/login', {email});
       setMessage(response.data.message);
       setEmail(''); // Clear input after success
     } catch (error) {

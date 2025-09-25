@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from './api/config';
 
 function AuthVerify({ onVerify }) {
   const [searchParams] = useSearchParams();
@@ -11,7 +11,7 @@ function AuthVerify({ onVerify }) {
     const verifyToken = async () => {
       if (token) {
         try {
-          const response = await axios.post('http://localhost:5000/api/auth/verify', { token });
+          const response = await api.post('/api/auth/verify', {token});
           
           // Store the token in localStorage
           localStorage.setItem('token', response.data.token);

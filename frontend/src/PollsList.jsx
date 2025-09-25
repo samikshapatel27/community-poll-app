@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './api/config';
 import { io } from 'socket.io-client';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function PollsList() {
   const [polls, setPolls] = useState([]);
@@ -11,7 +12,7 @@ function PollsList() {
   const fetchPolls = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/polls');
+      const response = await api.get('/api/polls')
       setPolls(response.data);
     } catch (err) {
       console.error('Error fetching polls:', err);
@@ -47,7 +48,7 @@ function PollsList() {
   // Handle voting
   const handleVote = async (pollId, optionIndex) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/polls/${pollId}/vote`, {
+      const response = await api.post(`/api/polls/${pollId}/vote`, {
         optionIndex: optionIndex
       });
       setPolls(prevPolls =>
@@ -69,7 +70,8 @@ function PollsList() {
 
     try {
       setDeleting(prev => ({ ...prev, [pollId]: true }));
-      await axios.delete(`http://localhost:5000/api/polls/${pollId}`);
+      await api.delete(`/api/polls/${pollId}`);
+
       // Poll will be removed via socket.io event
     } catch (err) {
       console.error('Error deleting poll:', err);
@@ -87,9 +89,6 @@ function PollsList() {
   const isPollCreator = (poll) => {
     const token = localStorage.getItem('token');
     if (!token) return false;
-    
-    // Simple check - in a real app, you'd decode the JWT to get user ID
-    // For now, we'll use a simple approach since we don't have user ID in frontend
     return localStorage.getItem('userPolls')?.includes(poll._id);
   };
 
