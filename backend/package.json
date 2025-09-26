@@ -1,6 +1,5 @@
 {
   "name": "community-poll-app-backend",
-  "type": "module",
   "version": "1.0.0",
   "description": "Backend server for Community Poll App with real-time voting",
   "main": "server.js",
